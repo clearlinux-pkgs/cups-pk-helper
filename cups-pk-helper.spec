@@ -4,7 +4,7 @@
 #
 Name     : cups-pk-helper
 Version  : 0.2.6
-Release  : 6
+Release  : 7
 URL      : https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-0.2.6.tar.xz
 Source0  : https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-0.2.6.tar.xz
 Summary  : A helper that makes system-config-printer use PolicyKit
