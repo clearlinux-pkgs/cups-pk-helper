@@ -4,10 +4,10 @@
 #
 Name     : cups-pk-helper
 Version  : 0.2.6
-Release  : 7
+Release  : 8
 URL      : https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-0.2.6.tar.xz
 Source0  : https://www.freedesktop.org/software/cups-pk-helper/releases/cups-pk-helper-0.2.6.tar.xz
-Summary  : A helper that makes system-config-printer use PolicyKit
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: cups-pk-helper-data = %{version}-%{release}
@@ -62,35 +62,37 @@ locales components for the cups-pk-helper package.
 
 %prep
 %setup -q -n cups-pk-helper-0.2.6
+cd %{_builddir}/cups-pk-helper-0.2.6
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1557082884
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604539666
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1557082884
+export SOURCE_DATE_EPOCH=1604539666
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cups-pk-helper
-cp COPYING %{buildroot}/usr/share/package-licenses/cups-pk-helper/COPYING
+cp %{_builddir}/cups-pk-helper-0.2.6/COPYING %{buildroot}/usr/share/package-licenses/cups-pk-helper/4cc77b90af91e615a64ae04893fdffa7939db84c
 %make_install
 %find_lang cups-pk-helper
 
@@ -109,7 +111,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/cups-pk-helper/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/cups-pk-helper/COPYING
+/usr/share/package-licenses/cups-pk-helper/4cc77b90af91e615a64ae04893fdffa7939db84c
 
 %files locales -f cups-pk-helper.lang
 %defattr(-,root,root,-)
